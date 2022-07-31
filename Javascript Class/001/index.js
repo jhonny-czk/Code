@@ -6,7 +6,7 @@
 
     c.fillRect(0,0,canvas.width, canvas.height);
 
-    const gravity = 2.0 //0.2
+    const gravity = 7.0 //0.7
     class Sprite{
         constructor( {position,velocity} ){
             this.position = position;
@@ -71,7 +71,6 @@
         }
     }
 
-    let lastKey
 
     function animate(){
         window.requestAnimationFrame(animate)
@@ -84,35 +83,35 @@
         enemy.velocity.x  = 0;
 
         //player movement
-        if(keys.a.pressed && lastKey === 'a'){
-            player.velocity.x = -1
-        } else if(keys.d.pressed && lastKey === 'd'){
-            player.velocity.x = 1
+        if(keys.a.pressed && player.lastKey === 'a'){
+            player.velocity.x = -5
+        } else if(keys.d.pressed && player.lastKey === 'd'){
+            player.velocity.x = 5
         }
 
         //enemy movement
         if(keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft'){
-            enemy.velocity.x = -1
+            enemy.velocity.x = -5
         } else if(keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight'){
-            enemy.velocity.x = 1
+            enemy.velocity.x = 5
         }
     }
 
     animate()
 
     window.addEventListener('keydown', (event) => {
-        console.log(event.key);
+        //console.log(event.key);
         switch (event.key){
             case 'd':
                 keys.d.pressed = true
-                lastKey = 'd'
+                player.lastKey = 'd'
                 break
             case 'a':
                 keys.a.pressed = true
-                lastKey = 'a'
+                player.lastKey = 'a'
                 break
             case 'w':
-                player.velocity.y = -100//-10
+                player.velocity.y = -300//-30
                 break
             ///////////////////////////////
             case 'ArrowRight':
@@ -124,7 +123,7 @@
                 enemy.lastKey = 'ArrowLeft'
                 break
             case 'ArrowUp':
-                enemy.velocity.y = -100//-10
+                enemy.velocity.y = -300//-30
                 break      
         }
         console.log(event.key);
